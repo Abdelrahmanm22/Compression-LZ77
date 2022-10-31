@@ -1,6 +1,10 @@
-#Created by abdelrahman Mohamed Ramadan
-#Computer Science Department
-#Faculty of Computers and Artificial Intelligence Cairo University
+"""
+Created by abdelrahman Mohamed Ramadan
+Computer Science Department
+Faculty of Computers and Artificial Intelligence Cairo University
+
+**Compression LZ77**
+"""
 
 class Tag:
   def __init__(self, Position, Length,NextSympol):
@@ -12,18 +16,24 @@ class Tag:
       print("<",self.Position,",",self.Length,",",self.NextSympol,">")
 
 
-
-
+#EXAMPLE 1
 SlidingWindow = "ABAABABAABBBBBBBBBBBBA"
+
+#EXAMPLE 2
+# SlidingWindow = "AAAABBABABBAAABBAAAAAAAAA"
+
+
 SearchWindow = ""
 x=""
 list = []
 z=0
 for i in SlidingWindow:
     x+=i
-    Pos=len(SearchWindow)-SearchWindow.find(x)
+    Pos=len(SearchWindow)-SearchWindow.rfind(x)
     # print(Pos,len(x)-1)
-    if SearchWindow.find(x) > -1 :
+
+    #To Handle case 2 we (Fixed Search Window) checked if pos <=10
+    if SearchWindow.rfind(x) > -1 and Pos<=10: #if exist
         z=Pos
     else:
         list.append( Tag(z,len(x)-1,i))
@@ -31,6 +41,10 @@ for i in SlidingWindow:
         SearchWindow+=x;
         x=""
 
-for obj in list:
-    print( obj.printTag())
+# lastChar = SlidingWindow[len(SlidingWindow) -1]
+if len((x))!=0:
+    list.append(Tag(z, len(x), "Null"))
 
+#For output
+for obj in list:
+    print(obj.printTag())
