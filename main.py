@@ -22,6 +22,9 @@ SlidingWindow = "ABAABABAABBBBBBBBBBBBA"
 #EXAMPLE 2
 # SlidingWindow = "AAAABBABABBAAABBAAAAAAAAA"
 
+#EXAMPLE 3
+#SlidingWindow = "XYYXZYXYYYYXYYXYYX"
+
 
 SearchWindow = ""
 x=""
@@ -33,10 +36,13 @@ for i in SlidingWindow:
     # print(Pos,len(x)-1)
 
     #To Handle case 2 we (Fixed Search Window) checked if pos <=10
-    if SearchWindow.rfind(x) > -1 and Pos<=10: #if exist
+    if SearchWindow.rfind(x) > -1 and Pos<=10 and len(x)<=4: #if exist
         z=Pos
     else:
-        list.append( Tag(z,len(x)-1,i))
+        if(len(x)-1==0):
+            list.append(Tag(0, len(x) - 1, i))
+        else:
+            list.append( Tag(z,len(x)-1,i))
 
         SearchWindow+=x;
         x=""
